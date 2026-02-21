@@ -122,7 +122,7 @@ const CartItem = ({ onContinueShopping }) => {
         <button
           className="get-started-button1"
           onClick={() =>
-            alert('Functionality to be added for future reference')
+            alert('Comming Soon')
           }
         >
           Checkout
