@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+import { useDispatch } from 'react-redux';
+import { addItem } from './CartSlice';
+
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
+    const dispatch = useDispatch();
+
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -297,13 +302,20 @@ function ProductList({ onHomeClick }) {
                                         <div className="product-title">{plant.name}</div> { }
                                         { }
                                         <div className="product-description">{plant.description}</div> { }
-                                        <div className="product-cost">${plant.cost}</div> { }
+                                        <div className="product-cost">{plant.cost}</div>
+
                                         <button
                                             className="product-button"
                                             onClick={() => handleAddToCart(plant)}
+                                            disabled={addedToCart[plant.name]}
+                                            style={{
+                                                backgroundColor: addedToCart[plant.name] ? 'gray' : '',
+                                                cursor: addedToCart[plant.name] ? 'not-allowed' : 'pointer'
+                                            }}
                                         >
-                                            Add to Cart
+                                            {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
                                         </button>
+
                                     </div>
                                 ))}
                             </div>
